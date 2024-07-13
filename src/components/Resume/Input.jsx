@@ -1,67 +1,59 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Preview from "./Preview";
+import Index from "../Forms/Index";
+import Nav from "./Nav";
 
 const Input = () => {
+  const [pageno, setPageno] = useState(1);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
+  const [place, setPlace] = useState("");
+  const [summary, setSummary] = useState("");
+  const [experience, setExperience] = useState("");
+  const [skills, setSkills] = useState("");
+
+  useEffect(()=>{
+    console.log(pageno)
+  },[pageno])
 
   return (
     <>
       <div className="flex gap-3 justify-between">
-        <div className="bg-red-100 w-6/12 flex justify-center items-center border">
-          <div className="flex flex-col justify-start gap-5 border">
-
-            <div>
-              <label htmlFor="fullname" className="block text-xs font-medium text-gray-700"> Full name </label>
-              <input
-                type="text"
-                id="fullname"
-                placeholder="Enter your full name"
-                className="mt-1 h-8 rounded border-gray-200 shadow-sm sm:text-sm"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="mobileNo" className="block text-xs font-medium text-gray-700"> Contact No. </label>
-              <input
-                type="text"
-                id="mobileNo"
-                placeholder="Enter your full name"
-                className="mt-1 h-8 rounded border-gray-200 shadow-sm sm:text-sm"
-                value={number}
-                onChange={(e) => setNumber(e.target.value)}
-              />
-            </div>
-
-
-            <div>
-              <label htmlFor="UserEmail" className="block text-xs font-medium text-gray-700"> Email </label>
-              <input
-                type="email"
-                id="UserEmail"
-                placeholder="john@rhcp.com"
-                className="mt-1 h-8 rounded border-gray-200 shadow-sm sm:text-sm"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-
-
-          </div>
+        <div className="bg-red-100 w-6/12 flex flex-col justify-center items-center border">
+        <Nav {...{pageno,setPageno}}/> 
+          <Index
+            {...{
+              pageno,
+              name,
+              setName,
+              email,
+              setEmail,
+              number,
+              setNumber,
+              place,
+              setPlace,
+              summary,
+              setSummary,
+              experience,
+              setExperience,
+              skills,
+              setSkills,
+            }}
+          />
         </div>
         <Preview
           {...{
             name,
             number,
-            email
+            email,
+            place,
+            summary,
           }}
         />
       </div>
     </>
-  )
-}
+  );
+};
 
 export default Input;
